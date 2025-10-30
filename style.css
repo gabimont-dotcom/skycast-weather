@@ -1,0 +1,69 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f7fa;
+  color: #333;
+}
+
+header {
+  background-color: #0077b6;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero {
+  background: url("https://tse4.mm.bing.net/th/id/OIP.j69ixpsg4J6KzKUXg2uKeAHaEK?rs=1&pid=ImgDetMain&o=7&rm=3")
+    center/cover;
+  color: white;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+main {
+  padding: 2rem;
+  text-align: center;
+}
+
+form input,
+form button,
+textarea {
+  padding: 0.7rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #0077b6;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0096c7;
+}
+
+footer {
+  background-color: #0077b6;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
