@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Processing Form</title>
+</head>
+
+<body>
+
+<script>
+    // Read the form data from the URL
+    const $_GET = location.search
+        .replace("?", "")
+        .split("&")
+        .map(pair => pair.split("=").reduce((key, value) => ({ [key]: decodeURIComponent(value) })))
+        .reduce((acc, obj) => ({ ...acc, ...obj }), {});
+
+    let $fullName = $_GET["fullname"];
+    let $email = $_GET["email"];
+    let $phone = $_GET["phone"];
+    let $comment = $_GET["comment"];
+
+    let $subject = "Contact Form Submission";
+
+    // PUT YOUR TEAMMATE'S IU EMAIL HERE
+    let $to = "yourname@iu.edu";
+
+    let $Body = "";
+    $Body += "Name: " + $fullName + "\n";
+    $Body += "Phone Number: " + $phone + "\n";
+    $Body += "Email: " + $email + "\n";
+    $Body += "Comments: " + $comment + "\n";
+
+    if ($fullName && $email) {
+        window.open(
+            `mailto:${$to}?subject=${encodeURIComponent($subject)}&body=${encodeURIComponent($Body)}`,
+            "_blank"
+        );
+        location.href = "thanks.html";
+    } else {
+        location.href = "contact.html";
+    }
+</script>
+
+</body>
+</html>
