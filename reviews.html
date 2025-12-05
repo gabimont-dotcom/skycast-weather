@@ -1,47 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reviews | SkyCast</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+// FIREBASE IMPORTS
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } 
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  <header>
-    <h1>SkyCast</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="facts.html">Facts</a></li>
-        <li><a href="history.html">History</a></li>
-        <li><a href="content.html">Weather Search</a></li>
-        <li><a href="reviews.html">Reviews</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+// FIREBASE CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyAJ0wVPtpxbZxw5r2b6wp3LbjLOFkfnkz8",
+  authDomain: "skycast-ab1c3.firebaseapp.com",
+  projectId: "skycast-ab1c3",
+  storageBucket: "skycast-ab1c3.firebasestorage.app",
+  messagingSenderId: "742518075574",
+  appId: "1:742518075574:web:68878e63c1e07a7c06b617",
+  measurementId: "G-6LMJ7ENSMQ"
+};
 
-  <main>
-    <h2>User Reviews</h2>
+// INIT FIREBASE
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-    <form id="reviewForm">
-      <input type="text" id="nameInput" placeholder="Your name" required />
-      <textarea id="reviewInput" placeholder="Write a review..." required></textarea>
-      <button type="submit">Submit Review</button>
-    </form>
+const reviewForm = document.querySelector("#reviewForm");
+const nameInput = document.querySelector("#nameInput");
+const reviewInput = document.querySelector("#reviewInput");
+const reviewsList = document.querySelector("#reviewsList");
 
-    <h3>All Reviews</h3>
-    <div id="reviewsList"></div>
-  </main>
+// ADD REVIEW
+reviewForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-  <footer>
-    <p>© 2025 SkyCast Weather</p>
-  </footer>
+  await addDoc(collection(db, "reviews"), {
+    name: nameInput.value,
+    review: reviewInput.value
+  });
 
-  <script type="module" src="reviews.js"></script>
+  nameInput.value = "";
+  reviewInput.value = "";
+  loadReviews();
+});
 
-</body>
-</html>
+// LOAD REVIEWS
+async function loadReviews() {
+  reviewsList.innerHTML = "";
+  const snapshot = await getDocs(collection(db, "reviews"));
 
+  snapshot.forEach((docItem) => {
+    const data = docItem.data();
+    const id = docItem.id;
+
+    reviewsList.innerHTML += `
+      <div class="review-item">
+        <p><strong>${data.name}</strong></p>
+        <p>${data.review}</p>
+        <button onclick="deleteReview('${id}')">Delete</button>
+      </div>
+    `;
+  });
+}
+
+// DELETE REVIEW
+window.deleteReview = async function(id) {
+  await deleteDoc(doc(db, "reviews", id));
+  loadReviews();
+};
+
+loadReviews();
