@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reviews | SkyCast</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>SkyCast</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="facts.html">Facts</a></li>
+        <li><a href="history.html">History</a></li>
+        <li><a href="content.html">Weather Search</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>User Reviews</h2>
+
+    <form id="reviewForm">
+      <input type="text" id="nameInput" placeholder="Your name" required />
+      <textarea id="reviewInput" placeholder="Write a review..." required></textarea>
+      <button type="submit">Submit Review</button>
+    </form>
+
+    <h3>All Reviews</h3>
+    <div id="reviewsList"></div>
+  </main>
+
+  <footer>
+    <p>© 2025 SkyCast Weather</p>
+  </footer>
+
+  <script type="module" src="reviews.js"></script>
+
+</body>
+</html>
+
